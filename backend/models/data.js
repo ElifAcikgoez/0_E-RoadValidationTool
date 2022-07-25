@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
 
-  achsen: String,
+  achse: String,
   schadstoffklasse: String,
   gewichtsklasse: String,
   dieselverbrauch: String
