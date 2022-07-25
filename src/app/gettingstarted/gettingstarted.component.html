@@ -1,0 +1,49 @@
+<!--
+<div>
+<h4>Dieselverbrauch pro 100km</h4>
+<mat-form-field appearance="fill">
+  <mat-label> in 0,00 €</mat-label>
+  <input type="text" id="dieselverbrauch" formControlName="dieselverbrauchControl" matInput placeholder="pro 100km"/>
+</mat-form-field>
+</div>
+<div>
+<h4>Achsen</h4>
+<mat-form-field appearance="fill">
+  <mat-label>Achsen</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let achse of achsen" [value]="achse.value">
+      {{achse.viewValue}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+</div>
+<div>
+<h4>Gewichtsklasse</h4>
+<mat-form-field appearance="fill">
+  <mat-label>Gewichtsklasse</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let klasse of klassen" [value]="klasse.value">
+      {{klasse.viewValue1}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+</div>
+<div >
+<h4>Schadstoffklasse</h4>
+<mat-form-field appearance="fill">
+  <mat-label>Schadstoffklasse</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let schadstoffklasse of sklassen" [value]="schadstoffklasse.value">
+      {{schadstoffklasse.viewValue}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+</div>-->
+
+<div>
+  <button (submit)="post()"
+    mat-raised-button
+    matStepperNext
+  >Next</button>
+</div>

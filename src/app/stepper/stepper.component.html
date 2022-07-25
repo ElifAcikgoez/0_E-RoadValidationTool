@@ -1,0 +1,42 @@
+
+<div style="width: 600px;height: 600px; margin: 50px auto;">
+  <mat-horizontal-stepper
+  style="text-align: center;"
+  linear
+  #formStepper>
+
+    <mat-step label="Getting Started">
+      <app-gettingstarted></app-gettingstarted>
+    </mat-step>
+
+    <mat-step label="Route Planing">
+      <app-routeplaning></app-routeplaning>
+      <div>
+        <button
+          mat-raised-button
+          matStepperPrevious
+        >Back</button>
+        <button
+          mat-raised-button
+          matStepperNext
+        >Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step label="Comparison">
+      <app-comparison></app-comparison>
+      <p>Done.</p>
+      <div>
+        <button
+        mat-button
+        matStepperPrevious
+        >Back</button>
+        <button
+          mat-button
+          (click)="formStepper.reset()"
+        >Reset</button>
+      </div>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+</div>
