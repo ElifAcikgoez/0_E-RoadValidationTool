@@ -29,52 +29,14 @@ interface Achse {
 })
 
 export class GettingstartedComponent implements OnInit {
-  datas: Data[];
-  data: Data;
-  selectedId: number;
-  form: FormGroup;
-  id: string = '';
-  constructor(
-    private route: ActivatedRoute,
-    private bs: BackendService,
-    private fb: FormBuilder,
-    private ds: DataService
-  ) {
-    this.form = this.fb.group(
-      {
-        verbrauchControl: ['', Validators.required],
-        achseControl: ['', Validators.required],
-        schadstoffControl: ['', Validators.required],
-        gewichtsControl: ['', Validators.required],
-        dieselverbrauchControl : ['', Validators.required],
-      }
-    );
+
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.selectedId = Number(this.route.snapshot.paramMap.get('id'));
-    if (this.selectedId === 0) {
-      this.readAll();
-    }
 
   }
 
-
-  readAll(): void {
-    this.bs.getAll().subscribe(
-      (
-        response: Data[]) => {
-        this.datas = response;
-        console.log(this.datas);
-        return this.datas;
-      },
-      error => console.log(error)
-    );
-  }
-
-  post(): void{
-    this.ds.create(this.form)
-  }
   klassen: Klasse[] = [
     {value: 'klasse-0', viewValue1: '< 7,5t (nicht mautpflichtig)'},
     {value: 'klasse-1', viewValue1: '7,5t - 11,99t'},

@@ -1,1 +1,28 @@
 <p>create works!</p>
+<main class="d-flex min-vh-100">
+  <fieldset class="container  mt-5">
+    <form [formGroup]="form" >
+      <div class="form-group row">
+        <label class="col-2 col-form-label" for="achse">Achsen</label>
+        <input type="text" class="col-10 form-control" id="achse" placeholder="Achsen" formControlName="achseControl">
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label" for="schadstoffklasse">Schadstoffklasse</label>
+        <input type="email" class="col-10 form-control" id="schadstoffklasse" placeholder="Schadstoffklasse" formControlName="schadstoffControl">
+
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label" for="gewichtsklasse">Gewichtsklasse</label>
+        <input type="text" class="col-10 form-control" id="gewichtsklasse" placeholder="Gewichtsklasse" formControlName="gewichtControl">
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label" for="dieselverbrauch">Dieselverbrauch</label>
+        <input type="text" class="col-10 form-control" id="dieselverbrauch" placeholder="dieselverbauch" formControlName="dieselControl">
+      </div>
+      <div class="form-group row  justify-content-end">
+        <button (click)="create()" type="submit" class="col-4 btn btn-secondary"> Create </button>
+      </div>
+    </form>
+  </fieldset>
+</main>
