@@ -6,18 +6,33 @@
       <mat-form-field >
         <mat-label class="col-2 col-form-label" for="achse">Achsen</mat-label>
         <input type="text" matInput class="col-10 form-control" id="achse" placeholder="Achsen" formControlName="achseControl">
+        <mat-select (selectionChange)="changeAchse($event.value)">
+          <mat-option *ngFor="let a of achsen_array" [value]="a">
+            {{a}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
       </div>
       <div>
       <mat-form-field class="form-group row">
         <mat-label class="col-2 col-form-label" for="schadstoffklasse">Schadstoffklasse</mat-label>
         <input type="text" matInput class="col-10 form-control" id="schadstoffklasse" placeholder="Schadstoffklasse" formControlName="schadstoffControl">
+        <mat-select (selectionChange)="changeSchadstoff($event.value)">
+          <mat-option *ngFor="let s of schadstoff_array" [value]="s">
+            {{s}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
       </div>
       <div >
         <mat-form-field>
         <mat-label class="col-2 col-form-label" for="gewichtsklasse">Gewichtsklasse</mat-label>
         <input type="text" matInput class="col-10 form-control" id="gewichtsklasse" placeholder="Gewichtsklasse" formControlName="gewichtControl">
+          <mat-select (selectionChange)="changeKlasse($event.value)">
+            <mat-option *ngFor="let k of klassen_array" [value]="k">
+              {{k}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div>

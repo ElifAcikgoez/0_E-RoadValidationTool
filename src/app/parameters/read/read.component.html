@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <div class="container mt-3">
   <h3 class="m-3">Alle Einträge</h3>
   <div class="table-responsive">
@@ -21,8 +22,15 @@
         <td>{{ data.gewichtsklasse }}</td>
         <td>{{ data.schadstoffklasse }}</td>
         <td>
-          <a [routerLink]="['/data', data._id]"> <span class=" bi bi-pencil-square px-5 "></span></a>
-          <span (click)="delete(data._id)" class=" bi bi-trash px-5 "></span>
+
+<!--          <a [routerLink]="['/data', data._id]"> <span class=" bi bi-pencil-square px-5 "></span></a>-->
+<!--          <span (click)="delete(data._id)" class=" bi bi-trash px-5 "></span>-->
+          <span>
+          <mat-icon (click)="delete(data._id)"> delete </mat-icon>
+          </span>
+          <span>
+          <mat-icon [routerLink]="['/data', data._id]">create</mat-icon>
+          </span>
         </td>
       </tr>
       </tbody>

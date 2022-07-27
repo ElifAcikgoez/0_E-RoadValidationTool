@@ -55,6 +55,6 @@ export class ReadComponent implements OnInit {
   {
     this.deleted = deleted;
     this.readAll();
-    this.router.navigateByUrl('/read');
+    this.router.navigateByUrl('/');
   }
 }

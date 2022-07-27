@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BackendService } from '../../shared/backend.service';
 import { Data } from '../../shared/data';
@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormControl, FormGroupDirective, NgForm, } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import {MatSelect} from "@angular/material/select";
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -57,6 +58,19 @@ export class CreateComponent implements OnInit {
     }
   }
 
+  changeAchse(value: any) {
+    this.achse_v = value
+    console.log("SELECTED ACHSE "+value);
+  }
+  changeSchadstoff(value: any) {
+    this.schadstoff_v = value
+    console.log("SELECTED ACHSE "+value);
+  }
+  changeKlasse(value: any) {
+    this.klasse_v = value
+    console.log("SELECTED ACHSE "+value);
+  }
+
   create(): void {
 
     this.data = {
@@ -68,10 +82,11 @@ export class CreateComponent implements OnInit {
 
     }
     const values = this.form.value;
-    this.data.achse =  values.achseControl;
+
+    this.data.achse =  this.achse_v;
     this.data.dieselverbrauch = values.dieselControl;
-    this.data.schadstoffklasse = values.schadstoffControl;
-    this.data.gewichtsklasse = values.gewichtControl;
+    this.data.schadstoffklasse = this.schadstoff_v;
+    this.data.gewichtsklasse = this.klasse_v;
 
 
 
