@@ -44,7 +44,7 @@ export class RouteplaningComponent implements OnInit {
       origin: (<HTMLInputElement>document.getElementById("start")).value,
       destination: (<HTMLInputElement>document.getElementById("ziel")).value,
       travelMode: google.maps.TravelMode.DRIVING, //WALKING, BYCYCLING, TRANSIT
-      unitSystem: google.maps.UnitSystem.IMPERIAL
+      unitSystem: google.maps.UnitSystem.METRIC
     }
     directionsService.route(request, function (result, status) {
       if (status == google.maps.DirectionsStatus.OK) {
