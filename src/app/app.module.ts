@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import {MaterialModule} from './material-module'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { AgmCoreModule } from '@agm/core';
+
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StepperComponent } from './stepper/stepper.component';
 import {MatStepperModule} from "@angular/material/stepper";
@@ -43,6 +46,11 @@ import {MatInputModule} from "@angular/material/input";
     HttpClientModule,
     MaterialModule,
     MatInputModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDbsGq82noLvR6R3I89AN3oQmHBD6XLDoM',
+      libraries: ['places']
+    }),
+    GooglePlaceModule
 
 
   ],
