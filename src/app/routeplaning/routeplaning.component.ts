@@ -11,6 +11,7 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./routeplaning.component.css']
 })
 export class RouteplaningComponent implements OnInit {
+  output = '';
   isApiLoaded = false;
   options: any = {
     componentRestrictions: { country: 'DE' }
@@ -34,5 +35,37 @@ export class RouteplaningComponent implements OnInit {
     console.log(address.formatted_address)
     console.log(address.geometry.location.lat())
     console.log(address.geometry.location.lng())
+  }
+
+  calcRoute(){
+    let directionsService = new google.maps.DirectionsService();
+    let directionsDisplay = new google.maps.DirectionsRenderer();
+    var request = {
+      origin: (<HTMLInputElement>document.getElementById("start")).value,
+      destination: (<HTMLInputElement>document.getElementById("ziel")).value,
+      travelMode: google.maps.TravelMode.DRIVING, //WALKING, BYCYCLING, TRANSIT
+      unitSystem: google.maps.UnitSystem.IMPERIAL
+    }
+    directionsService.route(request, function (result, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+
+        //Get distance and time
+        var output = document.querySelector('#output');
+        // @ts-ignore
+        output.innerHTML = "<div class='alert-info'>From: " + (<HTMLInputElement>document.getElementById("start")).value + ".<br />To: " +(<HTMLInputElement>document.getElementById("ziel")).value + ".<br /> Driving distance <i class='fas fa-road'></i> : " + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
+
+        //display route
+        directionsDisplay.setDirections(result);
+      } else {
+        //delete route from map
+        directionsDisplay.setDirections({ routes: [] });
+        //center map in London
+
+
+        //show error message
+        // @ts-ignore
+      }
+    });
+
   }
 }
