@@ -1,7 +1,10 @@
 export interface Data {
   _id: string;
-  achse: String,
-  schadstoffklasse: String,
-  gewichtsklasse: String,
-  dieselverbrauch: String
+  achse: string;
+  schadstoffklasse: string;
+  gewichtsklasse: string;
+  dieselverbrauch: string;
+  start: string;
+  ziel: string;
+  streckenlaenge: string;
 }

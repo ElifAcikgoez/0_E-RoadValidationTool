@@ -13,7 +13,9 @@ router.post('/data', async(req, res) => {
     achse: req.body.achse,
     schadstoffklasse: req.body.schadstoffklasse,
     gewichtsklasse: req.body.gewichtsklasse,
-    dieselverbrauch: req.body.dieselverbrauch
+    dieselverbrauch: req.body.dieselverbrauch,
+    start: req.body.start,
+    ziel: req.body.ziel
   })
   await newData.save();
   res.send(newData);
@@ -50,6 +52,13 @@ router.patch('/data/:id', async(req, res) => {
     if (req.body.dieselverbrauch) {
       data.dieselverbrauch = req.body.dieselverbrauch
     }
+    if (req.body.start) {
+      data.start = req.body.dieselverbrauch
+    }
+    if (req.body.ziel) {
+      data.ziel = req.body.ziel
+    }
+
 
     await Data.updateOne({ _id: req.params.id }, data);
     res.send(data)

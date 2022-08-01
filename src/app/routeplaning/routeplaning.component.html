@@ -1,27 +1,30 @@
 <p>routeplaning works!</p>
+<form [formGroup]="form" >
 <div>
   <mat-form-field appearance="fill" *ngIf="isApiLoaded">
     <mat-label>Start</mat-label>
-    <input  id="start"
+    <input  formControlName="startControl"
+            id="start"
             class="form-control"
             ngx-google-places-autocomplete
             [options]="options"
-            (onAddressChange)="handleAddressChange($event)"
+            (onAddressChange)="handleAddressChangeStart($event)"
             type="text" matInput placeholder="Enter Start"/>
   </mat-form-field>
 </div>
 <div>
   <mat-form-field appearance="fill" *ngIf="isApiLoaded">
     <mat-label>Ziel</mat-label>
-    <input  id="ziel"
+    <input  formControlName="zielControl"
+            id="ziel"
             class="form-control"
             ngx-google-places-autocomplete
             [options]="options"
-            (onAddressChange)="handleAddressChange($event)"
+            (onAddressChange)="handleAddressChangeZiel($event)"
             type="text" matInput placeholder="Enter Ziel"/>
   </mat-form-field>
 </div>
-
+</form>
 
 
 <!--<div class="row mt-3">
@@ -29,7 +32,7 @@
     <input class="form-control"
            ngx-google-places-autocomplete
            [options]="options"
-           (onAddressChange)="handleAddressChange($event)"
+           (onAddressChange)="handleAddressChangeStart($event)"
     />
   </div>
 </div>-->
@@ -42,3 +45,7 @@
 <div id="output">
 
 </div>
+<div id="km" >
+
+</div>
+

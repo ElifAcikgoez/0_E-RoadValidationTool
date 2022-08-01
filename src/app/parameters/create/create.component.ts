@@ -5,6 +5,7 @@ import { Data } from '../../shared/data';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import {RouteplaningService} from '../../shared/routeplaning.service';
 import { FormControl, FormGroupDirective, NgForm, } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import {MatSelect} from "@angular/material/select";
@@ -21,6 +22,7 @@ export class CreateComponent implements OnInit {
   achse_v= '';
   diesel_v = '';
   schadstoff_v ='';
+  start='start';
 
   klassen_array: any[] = ['< 7,5t (nicht mautpflichtig)','7,5t - 11,99t','12t - 18t','>18t']
   achsen_array: any[] = ['1','2','3','4','5','> 5']
@@ -30,6 +32,7 @@ export class CreateComponent implements OnInit {
               private bs: BackendService,
               private fb: FormBuilder,
               private router: Router,
+              private rps: RouteplaningService
              ) {
 
 
@@ -78,7 +81,10 @@ export class CreateComponent implements OnInit {
       achse : '',
       schadstoffklasse :'',
       dieselverbrauch:'',
-      gewichtsklasse: ''
+      gewichtsklasse: '',
+      start: '',
+      ziel: '',
+      streckenlaenge:''
 
     }
     const values = this.form.value;
@@ -87,7 +93,10 @@ export class CreateComponent implements OnInit {
     this.data.dieselverbrauch = values.dieselControl;
     this.data.schadstoffklasse = this.schadstoff_v;
     this.data.gewichtsklasse = this.klasse_v;
-
+    this.data.start = this.rps.start;
+    console.log('create:' +this.rps.start)
+    this.data.ziel = this.rps.ziel;
+    this.data.streckenlaenge = '';
 
 
     this.bs.create(this.data)

@@ -12,4 +12,5 @@ export class ComparisonComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
 }
