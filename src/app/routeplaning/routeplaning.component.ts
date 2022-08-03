@@ -7,6 +7,7 @@ import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import {map} from 'rxjs/operators';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RouteplaningService} from '../shared/routeplaning.service';
+import {element} from 'protractor';
 @Component({
   selector: 'app-routeplaning',
   templateUrl: './routeplaning.component.html',
@@ -14,16 +15,15 @@ import {RouteplaningService} from '../shared/routeplaning.service';
 })
 export class RouteplaningComponent implements OnInit {
 
-
-
-  km : any;
   datas!: Data;
   start_v = '';
   ziel_v= '';
+  strecke: any;
   public streckenlaenge_v = '';
   output = '';
   isApiLoaded = false;
   form!: FormGroup;
+
 
   // @ts-ignore
   map: google.maps.Map;
@@ -60,6 +60,19 @@ export class RouteplaningComponent implements OnInit {
         zoom: 6,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       });
+
+
+
+      var poly = new google.maps.Polyline({
+        map: this.map,
+        strokeColor: 'green'
+      });
+      var points = new google.maps.MVCArray([
+        new google.maps.LatLng(53.5510846, 9.9936818),
+        new google.maps.LatLng(52.5200065, 13.40)],
+      );
+      poly.setPath(points);
+
       this.directionsService = new google.maps.DirectionsService();
       this.directionsRenderer = new google.maps.DirectionsRenderer({suppressMarkers: true});
       this.directionsRenderer.setOptions({
@@ -95,37 +108,48 @@ export class RouteplaningComponent implements OnInit {
 
   calcRoute(){
     const directionsDisplay = this.directionsRenderer;
-
+    let b: any;
     var request = {
       origin: (<HTMLInputElement>document.getElementById("start")).value,
       destination: (<HTMLInputElement>document.getElementById("ziel")).value,
       travelMode: google.maps.TravelMode.DRIVING, //WALKING, BYCYCLING, TRANSIT
       unitSystem: google.maps.UnitSystem.METRIC
     }
-    this.directionsService.route(request, function (result, status) {
+    this.directionsService.route(request, (result, status) => {
       if (status == google.maps.DirectionsStatus.OK) {
 
         //Get distance and time
         var output = document.querySelector('#output');
+        var km = document.querySelector('#km');
 
         // @ts-ignore
         output.innerHTML = "<div class='alert-info'>From: " + (<HTMLInputElement>document.getElementById("start")).value + ".<br />To: " +(<HTMLInputElement>document.getElementById("ziel")).value + ".<br /> Driving distance <i class='fas fa-road'></i> : " + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
-        var strecke = result?.routes[0].legs[0].distance?.text
-        console.log(strecke)
+
+        // @ts-ignore
+        km = result?.routes[0].legs[0].distance?.text
+        this.strecke = km;
+        this.rs.setStrecke(this.strecke)
+
+        console.log('result'+this.strecke)
+
+
         // @ts-ignore
         //display route
         // @ts-ignore
         directionsDisplay.setDirections(result);
       } else {
         //delete route from map
-        directionsDisplay.setDirections({ routes: [] });
+        directionsDisplay.setDirections({ routes: [] });// Get data about the mapped route
+
         //center map in London
         //show error message
         // @ts-ignore
       }
+      // @ts-ignore
+      // @ts-ignore
 
     });
-
   }
+
 
 }

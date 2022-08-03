@@ -96,7 +96,7 @@ export class CreateComponent implements OnInit {
     this.data.start = this.rps.start;
     console.log('create:' +this.rps.start)
     this.data.ziel = this.rps.ziel;
-    this.data.streckenlaenge = '';
+    this.data.streckenlaenge = this.rps.streckenlaenge;
 
 
     this.bs.create(this.data)

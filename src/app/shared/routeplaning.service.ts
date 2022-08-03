@@ -9,6 +9,7 @@ import { Data } from './data';
 export class RouteplaningService {
   start:any;
   ziel:any;
+  streckenlaenge: any;
 
   constructor() { }
 
@@ -21,6 +22,11 @@ export class RouteplaningService {
   setZiel(ziel:string){
     this.ziel = ziel;
     console.log('ziel rp: ' +this.ziel)
+
+  }
+  setStrecke(strecke:string){
+    this.streckenlaenge = strecke;
+    console.log('strecke rp: ' +this.streckenlaenge)
 
   }
 

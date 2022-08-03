@@ -15,7 +15,8 @@ router.post('/data', async(req, res) => {
     gewichtsklasse: req.body.gewichtsklasse,
     dieselverbrauch: req.body.dieselverbrauch,
     start: req.body.start,
-    ziel: req.body.ziel
+    ziel: req.body.ziel,
+    streckenlaenge: req.body.streckenlaenge
   })
   await newData.save();
   res.send(newData);
@@ -58,6 +59,8 @@ router.patch('/data/:id', async(req, res) => {
     if (req.body.ziel) {
       data.ziel = req.body.ziel
     }
+    if (req.body.streckenlaenge) {
+      data.streckenlaenge = req.body.streckenlaenge}
 
 
     await Data.updateOne({ _id: req.params.id }, data);
