@@ -1,70 +1,106 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BackendService } from '../shared/backend.service';
 import { Data } from '../shared/data';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DataService } from '../shared/data.service';
-import { ActivatedRoute } from '@angular/router';
-
-
-/*interface Food {
-  value: string;
-  viewValue: string;
-}*/
-interface Klasse {
-  value: string;
-  viewValue1: string;
-}
-interface Schadstoffklasse {
-  value: string;
-  viewValue: string;
-}
-interface Achse {
-  value: string;
-  viewValue: string;
-}
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+import {RouteplaningService} from '../shared/routeplaning.service';
+import { FormControl, FormGroupDirective, NgForm, } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import {MatSelect} from "@angular/material/select";
 @Component({
   selector: 'app-gettingstarted',
   templateUrl: './gettingstarted.component.html',
   styleUrls: ['./gettingstarted.component.css']
 })
+// Error when invalid control is dirty, touched, or submitted
 
 export class GettingstartedComponent implements OnInit {
 
-  constructor() {
+  klasse_v = '';
+  achse_v= '';
+  diesel_v = '';
+  schadstoff_v ='';
+  start='start';
+
+  klassen_array: any[] = ['< 7,5t (nicht mautpflichtig)','7,5t - 11,99t','12t - 18t','>18t']
+  achsen_array: any[] = ['1','2','3','4','5','> 5']
+  schadstoff_array: any[]= ['Euro 0', 'Euro 1', 'Euro 2','Euro 3','Euro 4','Euro 5','Euro 6']
+
+  constructor(private route: ActivatedRoute,
+              private bs: BackendService,
+              private fb: FormBuilder,
+              private router: Router,
+              private rps: RouteplaningService
+             ) {
+
+
+
+
   }
+  form!: FormGroup;
+  data! : Data;
 
   ngOnInit(): void {
-
+    this.form = this.fb.group(
+      {
+        achseControl: ['', Validators.required],
+        dieselControl: ['', Validators.required],
+        schadstoffControl: ['', Validators.required],
+        gewichtControl: ['', Validators.required],
+      }
+    );
   }
 
-  klassen: Klasse[] = [
-    {value: 'klasse-0', viewValue1: '< 7,5t (nicht mautpflichtig)'},
-    {value: 'klasse-1', viewValue1: '7,5t - 11,99t'},
-    {value: 'klasse-2', viewValue1: '12t - 18t'},
-    {value: 'klasse-3', viewValue1: '>18t'},
-  ];
-  achsen: Achse[] = [
-    {value: '0', viewValue: '2'},
-    {value: '1', viewValue: '3'},
-    {value: '2', viewValue: '4'},
-    {value: '3', viewValue: '5'},
-    {value: '4', viewValue: '> 5'},
+  onFormSubmit() {
+    if (this.form.valid) {
+      console.log(this.form.value);
+    } else {
+      return;
+    }
+  }
+
+  changeAchse(value: any) {
+    this.achse_v = value
+    console.log("SELECTED ACHSE "+value);
+  }
+  changeSchadstoff(value: any) {
+    this.schadstoff_v = value
+    console.log("SELECTED ACHSE "+value);
+  }
+  changeKlasse(value: any) {
+    this.klasse_v = value
+    console.log("SELECTED ACHSE "+value);
+  }
+
+  create(): void {
+
+    this.data = {
+      _id: "",
+      achse : '',
+      schadstoffklasse :'',
+      dieselverbrauch:'',
+      gewichtsklasse: '',
+      start: '',
+      ziel: '',
+      streckenlaenge:''
+
+    }
+    const values = this.form.value;
+
+    this.data.achse =  this.achse_v;
+    this.data.dieselverbrauch = values.dieselControl;
+    this.data.schadstoffklasse = this.schadstoff_v;
+    this.data.gewichtsklasse = this.klasse_v;
+    this.data.start = this.rps.start;
+    console.log('create:' +this.rps.start)
+    this.data.ziel = this.rps.ziel;
+    this.data.streckenlaenge = this.rps.streckenlaenge;
 
 
+    this.bs.create(this.data)
 
-  ];
-  sklassen: Schadstoffklasse[] = [
-    {value: 'E0', viewValue: 'Euro 0'},
-    {value: 'E1', viewValue: 'Euro 1'},
-    {value: 'E2', viewValue: 'Euro 2'},
-    {value: 'E3', viewValue: 'Euro 3'},
-    {value: 'E4', viewValue: 'Euro 4'},
-    {value: 'E5', viewValue: 'Euro 5'},
-    {value: 'E6', viewValue: 'Euro 6'},
-  ];
-  /*foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
-  ];*/
+
+  }
 }

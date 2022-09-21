@@ -11,12 +11,10 @@ import { StepperComponent } from './stepper/stepper.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatFormFieldControl, MatFormFieldModule} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
-import { GettingstartedComponent } from './gettingstarted/gettingstarted.component';
 import { RouteplaningComponent } from './routeplaning/routeplaning.component';
-import { ComparisonComponent } from './comparison/comparison.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CreateComponent } from './parameters/create/create.component';
-import { ReadComponent } from './parameters/read/read.component';
+import { GettingstartedComponent } from './gettingstarted/gettingstarted.component';
+import { ComparisonComponent } from './comparison/comparison.component';
 import { UpdateComponent } from './parameters/update/update.component';
 import { DeleteComponent } from './parameters/delete/delete.component';
 import {MatSelectModule} from '@angular/material/select';
@@ -29,8 +27,8 @@ import {MatInputModule} from "@angular/material/input";
     GettingstartedComponent,
     RouteplaningComponent,
     ComparisonComponent,
-    CreateComponent,
-    ReadComponent,
+    GettingstartedComponent,
+    ComparisonComponent,
     UpdateComponent,
     DeleteComponent,
 

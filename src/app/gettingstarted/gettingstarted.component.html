@@ -1,49 +1,91 @@
-<!--
-<div>
-<h4>Dieselverbrauch pro 100km</h4>
-<mat-form-field appearance="fill">
-  <mat-label> in 0,00 €</mat-label>
-  <input type="text" id="dieselverbrauch" formControlName="dieselverbrauchControl" matInput placeholder="pro 100km"/>
-</mat-form-field>
-</div>
-<div>
-<h4>Achsen</h4>
-<mat-form-field appearance="fill">
-  <mat-label>Achsen</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let achse of achsen" [value]="achse.value">
-      {{achse.viewValue}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
-</div>
-<div>
-<h4>Gewichtsklasse</h4>
-<mat-form-field appearance="fill">
-  <mat-label>Gewichtsklasse</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let klasse of klassen" [value]="klasse.value">
-      {{klasse.viewValue1}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-</div>
-<div >
-<h4>Schadstoffklasse</h4>
-<mat-form-field appearance="fill">
-  <mat-label>Schadstoffklasse</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let schadstoffklasse of sklassen" [value]="schadstoffklasse.value">
-      {{schadstoffklasse.viewValue}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-</div>-->
-<app-create></app-create>
+<p>create works!</p>
+<main class="d-flex min-vh-100">
+  <fieldset class="container  mt-5">
+    <form [formGroup]="form" >
+      <div>
+      <mat-form-field >
+        <mat-label class="col-2 col-form-label" for="achse">Achsen</mat-label>
+<!--        <input type="text" matInput class="col-10 form-control" id="achse" placeholder="Achsen" formControlName="achseControl">-->
+        <mat-select formControlName="achseControl" (selectionChange)="changeAchse($event.value)">
+          <mat-option *ngFor="let a of achsen_array" [value]="a">
+            {{a}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+      <div>
+      <mat-form-field class="form-group row">
+        <mat-label class="col-2 col-form-label" for="schadstoffklasse">Schadstoffklasse</mat-label>
+<!--        <input type="text" matInput class="col-10 form-control" id="schadstoffklasse" placeholder="Schadstoffklasse" formControlName="schadstoffControl">-->
+        <mat-select formControlName="schadstoffControl" (selectionChange)="changeSchadstoff($event.value)">
+          <mat-option *ngFor="let s of schadstoff_array" [value]="s">
+            {{s}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+      <div >
+        <mat-form-field>
+        <mat-label class="col-2 col-form-label" for="gewichtsklasse">Gewichtsklasse</mat-label>
+<!--        <input type="text" matInput class="col-10 form-control" id="gewichtsklasse" placeholder="Gewichtsklasse" formControlName="gewichtControl">-->
+          <mat-select formControlName="gewichtControl" (selectionChange)="changeKlasse($event.value)">
+            <mat-option *ngFor="let k of klassen_array" [value]="k">
+              {{k}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+        <mat-label class="col-2 col-form-label" for="dieselverbrauch">Dieselverbrauch</mat-label>
+        <input type="text" matInput class="col-10 form-control" id="dieselverbrauch" placeholder="dieselverbauch" formControlName="dieselControl">
+        </mat-form-field>
+      </div>
+      <div class="form-group row  justify-content-end">
+        <button mat-button (click)="create()" type="submit" class="col-4 btn btn-secondary"> Create </button>
+      </div>
+    </form>
+  </fieldset>
+</main>
 <div>
   <button
-    mat-raised-button
-    matStepperNext
+          mat-raised-button
+          matStepperNext
   >Next</button>
 </div>
+<!--
+  <form class="example-form" [formGroup]="form" (ngSubmit)="onFormSubmit()">
+    <mat-form-field class="example-full-width">
+      <mat-label>Achsen</mat-label>
+      <input matInput style="display:none"/>
+      <mat-select id="achse" formControlName="achseControl" >
+        <mat-option  *ngFor="let a of achsen_array" [value]="a">
+          {{a}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Schadstoffklasse</mat-label>
+      <mat-select formControlName="schadstoffControl" >
+        <mat-option *ngFor="let schadstoff of schadstoff_array" [value]="schadstoff">
+          {{schadstoff}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Gewichtsklasse</mat-label>
+      <mat-select formControlName="gewichtControl" >
+        <mat-option *ngFor="let kl of klassen_array" [value]="kl">
+          {{kl}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Dieselverbrauch</mat-label>
+      <input formControlName="dieselControl" />
+    </mat-form-field>
+    <div class="button-row">
+      <button type="submit" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
+    </div>
+  </form>
+-->

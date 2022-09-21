@@ -107,16 +107,26 @@ export class RouteplaningComponent implements OnInit {
   }
 
   calcRoute(){
+    var points = new google.maps.MVCArray([
+      new google.maps.LatLng(53.5510846, 9.9936818),
+      new google.maps.LatLng(52.5200065, 13.40)],
+    );
     const directionsDisplay = this.directionsRenderer;
     let b: any;
     var request = {
       origin: (<HTMLInputElement>document.getElementById("start")).value,
+
       destination: (<HTMLInputElement>document.getElementById("ziel")).value,
       travelMode: google.maps.TravelMode.DRIVING, //WALKING, BYCYCLING, TRANSIT
       unitSystem: google.maps.UnitSystem.METRIC
     }
     this.directionsService.route(request, (result, status) => {
       if (status == google.maps.DirectionsStatus.OK) {
+
+
+
+
+
 
         //Get distance and time
         var output = document.querySelector('#output');
@@ -131,12 +141,18 @@ export class RouteplaningComponent implements OnInit {
         this.rs.setStrecke(this.strecke)
 
         console.log('result'+this.strecke)
+        // @ts-ignore
 
 
         // @ts-ignore
         //display route
         // @ts-ignore
         directionsDisplay.setDirections(result);
+
+
+       // @ts-ignore
+
+
       } else {
         //delete route from map
         directionsDisplay.setDirections({ routes: [] });// Get data about the mapped route

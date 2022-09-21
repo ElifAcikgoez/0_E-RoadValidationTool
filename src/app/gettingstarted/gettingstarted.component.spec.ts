@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GettingstartedComponent } from './gettingstarted.component';
 
-describe('GettingstartedComponent', () => {
+describe('CreateComponent', () => {
   let component: GettingstartedComponent;
   let fixture: ComponentFixture<GettingstartedComponent>;
 
